@@ -2,6 +2,7 @@ import 'package:delivast/models/user.dart';
 import 'package:delivast/provider/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flushbar/flushbar.dart';
 
 import '../widgets/profile_input.dart';
 import 'login_screen.dart';
@@ -117,7 +118,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           width: 170,
                           child: RaisedButton(
                             elevation: 0,
-                            onPressed: () {},
+                            onPressed: () {
+                              
+                            },
                             child: const Text(
                               "Save changes",
                               style: TextStyle(color: Colors.white),

@@ -19,10 +19,8 @@ class Auth with ChangeNotifier {
 
     try {
       response = await http.get("https://randomuser.me/api");
-      print(response);
     } catch (e) {
-      print(e);
-      return;
+      rethrow;
     }
 
     final convertedResponse = jsonDecode(response.body);
@@ -37,7 +35,6 @@ class Auth with ChangeNotifier {
     //     duration: Duration(seconds: 3),
     //   ),
     // );
-    print(_user);
   }
 
   Future<void> logout() async {

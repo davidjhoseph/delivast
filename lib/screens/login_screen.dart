@@ -1,20 +1,52 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flushbar/flushbar.dart';
 
 import '../provider/auth.dart';
 import './profile_screen.dart';
 
-class LoginScreen extends StatelessWidget {
-  final _formKey = GlobalKey<FormState>();
-  bool isLoading = false;                                                       
+class LoginScreen extends StatefulWidget {
   static const routeName = "/login";
 
-  void _login(BuildContext context){
-    isLoading = true;
-    Provider.of<Auth>(context, listen: false).login().then((_){
-      isLoading = false;
-      Navigator.of(context).pushNamed(ProfileScreen.routeName);
+  @override
+  _LoginScreenState createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final _formKey = GlobalKey<FormState>();
+
+  bool isLoading = false;
+
+  Future<void> _login(BuildContext context) async {
+    setState(() {
+      isLoading = true;
     });
+
+    try {
+      await Provider.of<Auth>(context, listen: false).login();
+
+      setState(() {
+        isLoading = false;
+      });
+
+      Flushbar(
+        // title: "Hey Ninja",
+        message: "Sucessfully Logged In",
+        duration: const Duration(seconds: 3),
+      )..show(context);
+
+      Navigator.of(context).pushNamed(ProfileScreen.routeName);
+    } catch (e) {
+      Flushbar(
+        // title: "Hey Ninja",
+        message: "An Error Occured please try again!",
+        duration: const Duration(seconds: 3),
+      )..show(context);
+
+      setState(() {
+        isLoading = false;
+      });
+    }
   }
 
   @override
@@ -99,11 +131,17 @@ class LoginScreen extends StatelessWidget {
                     onPressed: () {
                       _login(context);
                     },
-                    child: isLoading ? const SizedBox(height: 20, width: 20,child:  CircularProgressIndicator()) : const Text(
-                      "Log in",
-                      style: TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.bold),
-                    ),
+                    child: isLoading
+                        ? const SizedBox(
+                            height: 20,
+                            width: 20,
+                            child: CircularProgressIndicator())
+                        : const Text(
+                            "Log in",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          ),
                   ),
                 ),
                 Padding(
