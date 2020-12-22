@@ -6,7 +6,17 @@ import './profile_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
+  bool isLoading = false;                                                       
   static const routeName = "/login";
+
+  void _login(BuildContext context){
+    isLoading = true;
+    Provider.of<Auth>(context, listen: false).login().then((_){
+      isLoading = false;
+      Navigator.of(context).pushNamed(ProfileScreen.routeName);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final primaryColor = Theme.of(context).primaryColor;
@@ -86,11 +96,10 @@ class LoginScreen extends StatelessWidget {
                       // side: BorderSide(color: Colors.red),
                     ),
                     elevation: 0,
-                    onPressed: () async {
-                      await Provider.of<Auth>(context, listen: false).login();
-                      // Navigator.of(context).pushNamed(ProfileScreen.routeName);
+                    onPressed: () {
+                      _login(context);
                     },
-                    child: const Text(
+                    child: isLoading ? const SizedBox(height: 20, width: 20,child:  CircularProgressIndicator()) : const Text(
                       "Log in",
                       style: TextStyle(
                           color: Colors.white, fontWeight: FontWeight.bold),
