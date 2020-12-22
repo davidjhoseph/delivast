@@ -29,13 +29,13 @@ class _LoginScreenState extends State<LoginScreen> {
         isLoading = false;
       });
 
+
+      Navigator.of(context).pushNamed(ProfileScreen.routeName);
       Flushbar(
         // title: "Hey Ninja",
         message: "Sucessfully Logged In",
         duration: const Duration(seconds: 3),
       )..show(context);
-
-      Navigator.of(context).pushNamed(ProfileScreen.routeName);
     } catch (e) {
       Flushbar(
         // title: "Hey Ninja",
