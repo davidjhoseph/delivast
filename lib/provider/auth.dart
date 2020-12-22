@@ -50,11 +50,10 @@ class Auth with ChangeNotifier {
     final pref = await SharedPreferences.getInstance();
     final contains = pref.containsKey("userData");
 
-    if(contains){
+    if (contains) {
       _user = User.fromJson(pref.get("userData"));
     }
 
     return contains;
   }
-
 }
