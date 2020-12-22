@@ -22,7 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
     });
   }
 
-  void navigate() async {
+  Future<void> navigate() async {
     final isAuth = await Provider.of<Auth>(context, listen: false).isAuth();
     if (isAuth) {
       Navigator.of(context).pushReplacementNamed(ProfileScreen.routeName);

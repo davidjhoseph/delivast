@@ -2,7 +2,6 @@ import 'package:delivast/models/user.dart';
 import 'package:delivast/provider/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:flushbar/flushbar.dart';
 
 import '../widgets/profile_input.dart';
 import 'login_screen.dart';
@@ -46,7 +45,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     Provider.of<Auth>(context, listen: false).logout();
     Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
   }
-
+  
   @override
   Widget build(BuildContext context) {
     final primaryColor = Theme.of(context).primaryColor;
