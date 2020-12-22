@@ -7,6 +7,16 @@ import '../widgets/profile_input.dart';
 class ProfileScreen extends StatelessWidget {
   // final Map<String, dynamic> userData;
   // const ProfileScreen(this.userData);
+  TextEditingController firstNameController =
+      TextEditingController(text: "Laura");
+  TextEditingController lastNameController =
+      TextEditingController(text: "Silva");
+  TextEditingController emailController =
+      TextEditingController(text: "laurasilva@gmail.com");
+  TextEditingController passwordController =
+      TextEditingController(text: "mandyyyy");
+  TextEditingController phoneController =
+      TextEditingController(text: "044-841-9275");
   static const routeName = "/profile";
   @override
   Widget build(BuildContext context) {
@@ -34,19 +44,80 @@ class ProfileScreen extends StatelessWidget {
               // padding: const EdgeInsets.all(20),
               child: Column(
                 children: [
-                  const SizedBox(height:20),
-                  const CircleAvatar(radius: 35, backgroundColor: Colors.black,),
-                  const SizedBox(height:20),
-                  Text("Laura Silva", style: Theme.of(context).textTheme.subtitle1,),
-                  const SizedBox(height:30),
+                  const SizedBox(height: 20),
+                  const CircleAvatar(
+                    radius: 35,
+                    backgroundColor: Colors.black,
+                  ),
+                  const SizedBox(height: 20),
+                  Text(
+                    "Laura Silva",
+                    style: Theme.of(context).textTheme.subtitle1,
+                  ),
+                  const SizedBox(height: 30),
                   const Divider(),
-                  const SizedBox(height:25),
-                  const ProfileInput(label:"First Name"),
-                  const ProfileInput(label:"Last Name"),
-                  const ProfileInput(label:"Email"),
-                  const ProfileInput(label:"Password"),
-                  const ProfileInput(label:"Phone Number"),
-                  const SizedBox(height:25),
+                  const SizedBox(height: 25),
+                  ProfileInput(
+                    label: "First Name",
+                    textController: firstNameController,
+                  ),
+                  ProfileInput(
+                    label: "Last Name",
+                    textController: lastNameController,
+                  ),
+                  ProfileInput(
+                    label: "Email",
+                    keyType: TextInputType.emailAddress,
+                    textController: emailController,
+                  ),
+                  ProfileInput(
+                    label: "Password",
+                    isPassword: true,
+                    textController: passwordController,
+                  ),
+                  ProfileInput(
+                    label: "Phone Number",
+                    keyType: TextInputType.phone,
+                    textController: phoneController,
+                  ),
+                  const SizedBox(height: 15),
+                  SizedBox(
+                    width: 170,
+                    child: RaisedButton(
+                      elevation: 0,
+                      onPressed: () {},
+                      child: const Text(
+                        "Save changes",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 15),
+                  const Divider(),
+                  GestureDetector(
+                    onTap: (){
+                      Provider.of<Auth>(context).logout();
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 10, 0, 10),
+                      child: Row(
+                        children: [
+                          Image.asset(
+                            "assets/images/logout_icon.png",
+                            width: 25,
+                          ),
+                          const SizedBox(width: 60),
+                          const Text(
+                            "Log out",
+                            style: TextStyle(
+                                color: Color(0xFFE65540),
+                                fontWeight: FontWeight.bold),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 25),
                 ],
               ),
             ),
@@ -57,8 +128,3 @@ class ProfileScreen extends StatelessWidget {
   }
 }
 
-// FlatButton(
-// child: const Text("Logout"),
-//                 onPressed: () {
-//                   Provider.of<Auth>(context).logout();
-//                 },
