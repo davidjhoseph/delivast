@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../provider/auth.dart';
+import './profile_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
@@ -82,7 +86,10 @@ class LoginScreen extends StatelessWidget {
                       // side: BorderSide(color: Colors.red),
                     ),
                     elevation: 0,
-                    onPressed: () {},
+                    onPressed: () async {
+                      await Provider.of<Auth>(context, listen: false).login();
+                      // Navigator.of(context).pushNamed(ProfileScreen.routeName);
+                    },
                     child: const Text(
                       "Log in",
                       style: TextStyle(

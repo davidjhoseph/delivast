@@ -22,11 +22,12 @@ class _SplashScreenState extends State<SplashScreen> {
     });
   }
 
-  void navigate() {
-    if (Provider.of<Auth>(context, listen: false).isAuth) {
-      Navigator.of(context).pushNamed(ProfileScreen.routeName);
+  void navigate() async {
+    final isAuth = await Provider.of<Auth>(context, listen: false).isAuth();
+    if (isAuth) {
+      Navigator.of(context).pushReplacementNamed(ProfileScreen.routeName);
     } else {
-      Navigator.of(context).pushNamed(LoginScreen.routeName);
+      Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
     }
   }
 

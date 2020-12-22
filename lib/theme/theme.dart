@@ -21,6 +21,11 @@ ThemeData themeData(BuildContext context) {
         fontSize: 12,
         fontWeight: FontWeight.w400,
       ),
+      subtitle1: TextStyle(
+        color: Color(0xFF4A4A4A),
+        fontSize: 15,
+        fontWeight: FontWeight.w700,
+      ),
     ),
     inputDecorationTheme: InputDecorationTheme(
       isDense: true,
